@@ -1,5 +1,5 @@
 import logging
-from providers.gemini import GeminiFlashLiteProvider, GeminiFlashProvider
+
 from providers.groq_provider import GroqProvider
 from providers.openrouter import OpenRouterProvider
 
@@ -12,8 +12,6 @@ class AIGateway:
     def __init__(self):
         self.providers = []
         provider_classes = [
-            GeminiFlashLiteProvider,
-            GeminiFlashProvider,
             GroqProvider,
             OpenRouterProvider,
             LocalFallbackProvider,
