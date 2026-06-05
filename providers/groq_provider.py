@@ -9,7 +9,7 @@ class GroqProvider(AIProvider):
     def __init__(self):
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
-            logger.warning("GROQ_API_KEY not set – Groq will be unavailable")
+            logger.warning("GROQ_API_KEY not set – Groq unavailable")
             self.client = None
             return
         self.client = AsyncGroq(api_key=api_key)
@@ -20,7 +20,7 @@ class GroqProvider(AIProvider):
         try:
             chat = await self.client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
-                model="llama3-8b-8192",
+                model="llama-3.1-8b-instant",  # ← updated model
                 temperature=0.2,
             )
             return chat.choices[0].message.content

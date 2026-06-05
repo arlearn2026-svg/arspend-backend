@@ -22,7 +22,7 @@ class OpenRouterProvider(AIProvider):
             return None
         try:
             completion = await self.client.chat.completions.create(
-                model="google/gemini-2.0-flash-lite-preview-02-05:free",
+                model="meta-llama/llama-3.1-8b-instruct:free",  # ← free model
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.2,
             )
