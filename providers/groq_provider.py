@@ -4,9 +4,15 @@ from .base import AIProvider
 
 class GroqProvider(AIProvider):
     def __init__(self):
-        self.client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            self.client = None
+            return
+        self.client = AsyncGroq(api_key=api_key)
 
     async def generate(self, prompt: str) -> str | None:
+        if not self.client:
+            return None
         try:
             chat = await self.client.chat.completions.create(
                 messages=[{"role": "user", "content": prompt}],
